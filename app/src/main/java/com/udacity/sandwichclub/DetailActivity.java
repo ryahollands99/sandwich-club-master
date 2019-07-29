@@ -58,8 +58,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-
-
+        
         Intent intent = getIntent();
         if (intent == null) {
             closeOnError();
