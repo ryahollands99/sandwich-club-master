@@ -57,8 +57,7 @@ public class DetailActivity extends AppCompatActivity {
         mOrigin = (TextView) findViewById(R.id.origin_tv);
 
 
-
-
+        // Bulletspan
 
         Intent intent = getIntent();
         if (intent == null) {
