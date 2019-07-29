@@ -25,6 +25,8 @@ import com.udacity.sandwichclub.utils.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONStringer;
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         mOrigin = (TextView) findViewById(R.id.origin_tv);
 
 
-        // Bulletspan
+
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -102,14 +106,74 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(sandwich.getMainName());
 
+        List<String> ingredientsList = sandwich.getIngredients();
 
+        String textString = TextUtils.join(", ", ingredientsList).replace(",", "");
 
-        mIngredients.setText(TextUtils.join(", ", sandwich.getIngredients()).replace(",",""));
-        mAlsoKnownAs.setText(TextUtils.join(", ", sandwich.getAlsoKnownAs()).replace(",",""));
+        SpannableStringBuilder mSSBuilderIngredients = new SpannableStringBuilder();
+
+        mSSBuilderIngredients = showBullet(mSSBuilderIngredients, ingredientsList);
+
+        mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
+        //mIngredients.setText(TextUtils.join(", ", sandwich.getIngredients()).replace(",",""));
+        mAlsoKnownAs.setText(TextUtils.join(", ", sandwich.getAlsoKnownAs()).replace(", ",""));
         mDescription.setText(sandwich.getDescription());
         mOrigin.setText(sandwich.getPlaceOfOrigin());
 
         Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
+
+    //Custom method to generate a bulleted list
+    private SpannableStringBuilder showBullet (SpannableStringBuilder mSSBuilder, List<String> textList){
+        //Initialize a new BulletSpan
+        BulletSpan bulletSpan = new BulletSpan(30, Color.GREEN);
+
+        //List<String> textString = changeToList(jsonArray);
+
+
+        StringBuilder sb = new StringBuilder();
+
+       // String textString = TextUtils.join(",", textList).replace(",", " ");
+        for (String s : textList){
+            s.replace(",", "");
+            sb.append(s);
+            mSSBuilder.append(s);
+        }
+        String textString = sb.toString();
+
+       // for (int i=0; i < textList.size(); i++) {
+        for (String  textToBullet : textList) {
+            try {
+
+                int index = sb.indexOf(textToBullet);
+                Log.v("Bullet", "Item is " + textToBullet + "and index is " + index);
+                //mSSBuilder.append(textToBullet);
+                mSSBuilder.setSpan(bulletSpan, index, index+textToBullet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            } catch (IndexOutOfBoundsException e) {
+                //Log.v("ErrorMessage", t);
+                e.printStackTrace();
+            }
+
+        }
+        Log.v("Bullet", "mssBuilder is " + mSSBuilder);
+        return mSSBuilder;
+    }
+
+    //Custom method to separate JSONArray into seperate lists
+    private List<String> changeToList(JSONArray jsonArray){
+
+        List<String> textString = new ArrayList<>();
+        for (int i=0; i< jsonArray.length(); i = 0){
+            try {
+                textString.add(jsonArray.getString(i));
+            }catch(JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return textString;
+    }
+
+
 
 }
