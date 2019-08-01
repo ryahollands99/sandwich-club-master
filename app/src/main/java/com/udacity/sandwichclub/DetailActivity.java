@@ -106,17 +106,20 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(sandwich.getMainName());
 
+
         List<String> ingredientsList = sandwich.getIngredients();
+        List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
 
-        String textString = TextUtils.join(", ", ingredientsList).replace(",", "");
 
-        SpannableStringBuilder mSSBuilderIngredients = new SpannableStringBuilder();
 
-        mSSBuilderIngredients = showBullet(mSSBuilderIngredients, ingredientsList);
+        SpannableStringBuilder mSSBuilderIngredients;
+        SpannableStringBuilder mSSBuilderAlsoKnownAs;
+
+        mSSBuilderIngredients = showBullet(ingredientsList);
+        mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
 
         mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
-        //mIngredients.setText(TextUtils.join(", ", sandwich.getIngredients()).replace(",",""));
-        mAlsoKnownAs.setText(TextUtils.join(", ", sandwich.getAlsoKnownAs()).replace(", ",""));
+        mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
         mDescription.setText(sandwich.getDescription());
         mOrigin.setText(sandwich.getPlaceOfOrigin());
 
@@ -124,56 +127,29 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     //Custom method to generate a bulleted list
-    private SpannableStringBuilder showBullet (SpannableStringBuilder mSSBuilder, List<String> textList){
+    private SpannableStringBuilder showBullet (List<String> textList){
+
         //Initialize a new BulletSpan
-        BulletSpan bulletSpan = new BulletSpan(30, Color.GREEN);
+        BulletSpan bulletSpan = new BulletSpan(60, Color.GREEN);
 
-        //List<String> textString = changeToList(jsonArray);
+        //Create a spannable string builder
+        SpannableStringBuilder mSSBuilder = new SpannableStringBuilder();
 
+       int end = 0;
 
-        StringBuilder sb = new StringBuilder();
-
-       // String textString = TextUtils.join(",", textList).replace(",", " ");
+        //take each word out of the list, replace the comma with a space, add the word to mSSBuilder with a new line
+        // and add a bulletspan to the word
         for (String s : textList){
-            s.replace(",", "");
-            sb.append(s);
-            mSSBuilder.append(s);
+            s.replace(", ", "");
+            mSSBuilder.append(s + "\n");
+            int start = end;
+            end = start + s.length() + 1;
+            Log.v("Bullet", "Start and end index are " + start + " " + end + " for word " + s);
+            mSSBuilder.setSpan(bulletSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-        String textString = sb.toString();
 
-       // for (int i=0; i < textList.size(); i++) {
-        for (String  textToBullet : textList) {
-            try {
 
-                int index = sb.indexOf(textToBullet);
-                Log.v("Bullet", "Item is " + textToBullet + "and index is " + index);
-                //mSSBuilder.append(textToBullet);
-                mSSBuilder.setSpan(bulletSpan, index, index+textToBullet.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            } catch (IndexOutOfBoundsException e) {
-                //Log.v("ErrorMessage", t);
-                e.printStackTrace();
-            }
-
-        }
-        Log.v("Bullet", "mssBuilder is " + mSSBuilder);
         return mSSBuilder;
     }
-
-    //Custom method to separate JSONArray into seperate lists
-    private List<String> changeToList(JSONArray jsonArray){
-
-        List<String> textString = new ArrayList<>();
-        for (int i=0; i< jsonArray.length(); i = 0){
-            try {
-                textString.add(jsonArray.getString(i));
-            }catch(JSONException e){
-                e.printStackTrace();
-            }
-        }
-        return textString;
-    }
-
-
 
 }

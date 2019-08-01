@@ -73,7 +73,7 @@ public class JsonUtils {
             try {
                 String item = jsonArray.getString(i);
                 Log.v("Tag", item);
-                itemList.add("• " + item + "\n");
+                itemList.add(item);
 
             } catch (JSONException e) {
                 e.printStackTrace();
