@@ -129,8 +129,7 @@ public class DetailActivity extends AppCompatActivity {
     //Custom method to generate a bulleted list
     private SpannableStringBuilder showBullet (List<String> textList){
 
-        //Initialize a new BulletSpan
-        BulletSpan bulletSpan = new BulletSpan(60, Color.GREEN);
+
 
         //Create a spannable string builder
         SpannableStringBuilder mSSBuilder = new SpannableStringBuilder();
@@ -140,6 +139,8 @@ public class DetailActivity extends AppCompatActivity {
         //take each word out of the list, replace the comma with a space, add the word to mSSBuilder with a new line
         // and add a bulletspan to the word
         for (String s : textList){
+            //Initialize a new BulletSpan
+            BulletSpan bulletSpan = new BulletSpan(10, Color.BLACK);
             s.replace(", ", "");
             mSSBuilder.append(s + "\n");
             int start = end;
