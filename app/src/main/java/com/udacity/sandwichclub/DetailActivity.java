@@ -3,6 +3,8 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -38,6 +40,13 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+
+    //Create variables for Tab
+    private TabAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+
     //Create variables for the views
     private ImageView mIngredientsIv;
     private TextView mDescription;
@@ -53,6 +62,11 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+
+
+
+
 
         mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
         mIngredients = (TextView) findViewById(R.id.ingredients_tv);
@@ -91,6 +105,18 @@ public class DetailActivity extends AppCompatActivity {
         }catch(JSONException e){
             e.printStackTrace();
         }
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+
+        adapter = new TabAdapter(getSupportFragmentManager());
+        adapter.addFragment(new AboutFragment(), "About");
+        adapter.addFragment(new IngredientsFragment(),  "Ingredients");
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void closeOnError() {
@@ -118,10 +144,10 @@ public class DetailActivity extends AppCompatActivity {
         mSSBuilderIngredients = showBullet(ingredientsList);
         mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
 
-        mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
-        mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
-        mDescription.setText(sandwich.getDescription());
-        mOrigin.setText(sandwich.getPlaceOfOrigin());
+       // mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
+        //mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
+       // mDescription.setText(sandwich.getDescription());
+       // mOrigin.setText(sandwich.getPlaceOfOrigin());
 
         Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
