@@ -3,6 +3,8 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -36,12 +38,15 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    //Create variables for Tab
+    private TabAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+
     //Create variables for the views
     private ImageView mIngredientsIv;
-    private TextView mDescription;
-    private TextView mIngredients;
-    private TextView mAlsoKnownAs;
-    private TextView mOrigin;
+
 
 
 
@@ -50,11 +55,19 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+
+        adapter = new TabAdapter(getSupportFragmentManager());
+        adapter.addFragment(new AboutFragment(), "About");
+        adapter.addFragment(new IngredientsFragment(), "Ingredients");
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
         mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
         mIngredients = (TextView) findViewById(R.id.ingredients_tv);
-        mDescription = (TextView) findViewById(R.id.description_tv);
-        mAlsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
-        mOrigin = (TextView) findViewById(R.id.origin_tv);
+
 
 
 
