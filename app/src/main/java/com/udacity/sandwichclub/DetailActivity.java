@@ -48,11 +48,10 @@ public class DetailActivity extends AppCompatActivity {
 
 
     //Create variables for the views
+
+
     private ImageView mIngredientsIv;
-    private TextView mDescription;
-    private TextView mIngredients;
-    private TextView mAlsoKnownAs;
-    private TextView mOrigin;
+
 
 
 
@@ -69,10 +68,8 @@ public class DetailActivity extends AppCompatActivity {
 
 
         mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
-        mIngredients = (TextView) findViewById(R.id.ingredients_tv);
-        mDescription = (TextView) findViewById(R.id.description_tv);
-        mAlsoKnownAs = (TextView) findViewById(R.id.also_known_tv);
-        mOrigin = (TextView) findViewById(R.id.origin_tv);
+
+
 
 
 
@@ -132,22 +129,22 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(sandwich.getMainName());
 
+//
+//        List<String> ingredientsList = sandwich.getIngredients();
+//        List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
+//
 
-        List<String> ingredientsList = sandwich.getIngredients();
-        List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
 
-
-
-        SpannableStringBuilder mSSBuilderIngredients;
-        SpannableStringBuilder mSSBuilderAlsoKnownAs;
-
-        mSSBuilderIngredients = showBullet(ingredientsList);
-        mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
-
-       // mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
-        //mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
-       // mDescription.setText(sandwich.getDescription());
-       // mOrigin.setText(sandwich.getPlaceOfOrigin());
+//        SpannableStringBuilder mSSBuilderIngredients;
+//        SpannableStringBuilder mSSBuilderAlsoKnownAs;
+//
+//        mSSBuilderIngredients = showBullet(ingredientsList);
+//        mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
+//
+//       // mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
+//        //mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
+//       // mDescription.setText(sandwich.getDescription());
+//       // mOrigin.setText(sandwich.getPlaceOfOrigin());
 
         Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
