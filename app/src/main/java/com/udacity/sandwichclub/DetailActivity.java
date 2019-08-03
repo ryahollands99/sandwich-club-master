@@ -3,9 +3,12 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -13,6 +16,8 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.BulletSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -53,25 +58,31 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView mIngredientsIv;
 
 
-
-
-
+    //Return to main page when back button is clicked
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       switch(item.getItemId()) {
+           case android.R.id.home:
+               Intent intent = new Intent (this, MainActivity.class);
+               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+               startActivity(intent);
+            return true;
+           default:
+           return super.onOptionsItemSelected(item);
+       }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-
-
-
-
+        //Show a back button in the action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
-
-
-
-
 
 
         Intent intent = getIntent();
@@ -98,10 +109,14 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             populateUI(sandwich);
+//            toolbar.setTitle(sandwich.getMainName());
+            actionBar.setTitle(sandwich.getMainName());
 
         }catch(JSONException e){
             e.printStackTrace();
         }
+
+
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -127,7 +142,7 @@ public class DetailActivity extends AppCompatActivity {
                 .load(sandwich.getImage())
                 .into(mIngredientsIv);
 
-        setTitle(sandwich.getMainName());
+//        setTitle(sandwich.getMainName());
 
     }
 
