@@ -129,24 +129,6 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(sandwich.getMainName());
 
-//
-//        List<String> ingredientsList = sandwich.getIngredients();
-//        List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
-//
-
-
-//        SpannableStringBuilder mSSBuilderIngredients;
-//        SpannableStringBuilder mSSBuilderAlsoKnownAs;
-//
-//        mSSBuilderIngredients = showBullet(ingredientsList);
-//        mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
-//
-//       // mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
-//        //mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
-//       // mDescription.setText(sandwich.getDescription());
-//       // mOrigin.setText(sandwich.getPlaceOfOrigin());
-
-        Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
 
     //Custom method to generate a bulleted list
