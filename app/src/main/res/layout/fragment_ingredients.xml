@@ -13,8 +13,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F5F5F5"
+            android:layout_height="34dp"
             android:text="@string/detail_ingredients_label"
             android:textStyle="bold"
             style="@style/MyBannerTheme"/>
@@ -23,6 +22,8 @@
             android:id="@+id/ingredients_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.5"
+            android:paddingTop="8dp"
             style="@style/SandwichText"/>
 
     </LinearLayout>
