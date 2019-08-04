@@ -14,16 +14,16 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:background="#F5F5F5"
             android:text="@string/detail_ingredients_label"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="@style/MyBannerTheme"/>
 
         <TextView
             android:id="@+id/ingredients_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
+            style="@style/SandwichText"/>
 
     </LinearLayout>
 

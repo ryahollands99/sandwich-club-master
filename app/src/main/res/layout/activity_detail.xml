@@ -8,6 +8,8 @@
     android:orientation="vertical">
 
 
+
+
         <ImageView
             android:id="@+id/image_iv"
             android:layout_width="match_parent"
@@ -17,7 +19,7 @@
             android:scaleType="centerCrop" />
 
 
-
+    <include layout="@layout/app_bar"></include>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
@@ -25,11 +27,11 @@
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@android:color/white"
-        app:tabBackground="@android:color/darker_gray"
+        app:tabIndicatorColor="#7C4DFF"
+        app:tabBackground="@android:color/white"
         app:tabMode="fixed"
         app:tabMaxWidth="0dp"
-        app:tabSelectedTextColor="@android:color/white"
+        app:tabSelectedTextColor="#7C4DFF"
         >
 
 
