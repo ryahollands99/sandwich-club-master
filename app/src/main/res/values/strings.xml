@@ -13,9 +13,6 @@
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
 
-    <!-- Home Page Message -->
-    <string name="introduction">Lunch Time! Let\'s pick today\'s sandwich</string>
-
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
         <item>Bosna</item>

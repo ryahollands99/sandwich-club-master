@@ -7,15 +7,14 @@ import android.support.v4.app.Fragment;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.BulletSpan;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
@@ -51,11 +50,7 @@ public class IngredientsFragment extends Fragment {
             return getView();
         }
 
-
-
-        mIngredients = (TextView) rootView.findViewById(R.id.ingredients_tv);
-
-
+        mIngredients = rootView.findViewById(R.id.ingredients_tv);
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
@@ -96,8 +91,6 @@ public class IngredientsFragment extends Fragment {
     //Custom method to generate a bulleted list
     private SpannableStringBuilder showBullet (List<String> textList){
 
-
-
         //Create a spannable string builder
         SpannableStringBuilder mSSBuilder = new SpannableStringBuilder();
 
@@ -115,8 +108,6 @@ public class IngredientsFragment extends Fragment {
             //Log.v("Bullet", "Start and end index are " + start + " " + end + " for word " + s);
             mSSBuilder.setSpan(bulletSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-
-
         return mSSBuilder;
     }
 

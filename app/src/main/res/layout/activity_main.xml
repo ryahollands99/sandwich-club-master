@@ -3,36 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.udacity.sandwichclub.MainActivity"
-    android:orientation="vertical">
-
-
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:background="#7C4DFF"
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="8dp"/>
-    <TextView
-        android:id="@+id/intro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#7C4DFF"
-        android:text="@string/introduction"
-        android:paddingBottom="8dp"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/logo"/>
-
+    tools:context="com.udacity.sandwichclub.MainActivity">
 
     <ListView
         android:id="@+id/sandwiches_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/intro" />
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
