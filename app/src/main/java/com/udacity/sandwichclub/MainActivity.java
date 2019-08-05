@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sandwiches);
        SandwichAdapter adapter = new SandwichAdapter(sandwiches, getApplication());
        recyclerView.setAdapter(adapter);
+       recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         itemAnimator.setAddDuration(1000);
@@ -86,32 +88,47 @@ public class MainActivity extends AppCompatActivity {
 
    private List<Sandwich> initSandwiches(Intent intent) {
 
-        List<Sandwich> sandwich = new ArrayList<>();
+        List<Sandwich> sandwiches = new ArrayList<>();
+
+       String[] sandwichString = getResources().getStringArray(R.array.sandwich_details);
+
+       for(int i=0; i < sandwichString.length; i++ ){
+            String json = sandwichString[i];
+            try{
+                Sandwich sandwich = JsonUtils.parseSandwichJson(json);
+                sandwiches.add(sandwich);
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+       }
+       return sandwiches;
+   }
 
 
 //        List<Sandwich> sandwiches = new List<String>;
 
 
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
-        if (position == DEFAULT_POSITION) {
-            // EXTRA_POSITION not found in intent
-            finish();
-        }
-
-        String[] sandwichString = getResources().getStringArray(R.array.sandwich_details);
-        String json = sandwichString[position];
-        Log.v("Intent", "Position is " + position);
-
-        try {
-            sandwich.add(JsonUtils.parseSandwichJson(json));
-
-                return sandwich;
-            }catch (JSONException e){
-            e.printStackTrace();
-            finish();
-        }
-          return sandwich;
-         }
+//        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+//        if (position == DEFAULT_POSITION) {
+//            // EXTRA_POSITION not found in intent
+//            finish();
+//        }
+//
+//        String[] sandwichString = getResources().getStringArray(R.array.sandwich_details);
+//        String json = sandwichString[position];
+//        Log.v("Intent", "Position is " + position);
+//
+//        try {
+//            sandwich.add(JsonUtils.parseSandwichJson(json));
+//
+//                return sandwich;
+//            }catch (JSONException e){
+//            e.printStackTrace();
+//            finish();
+//        }
+//          return sandwich;
+//         }
 
 
 }
