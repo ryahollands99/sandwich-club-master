@@ -10,7 +10,7 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="0dp"
     android:layout_marginRight="8dp"
     android:layout_marginLeft="8dp"
     android:clickable="true"
@@ -46,20 +46,11 @@
 
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/popularity"
-            android:layout_width="32dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|top"
-            android:background="@android:color/holo_red_dark"
-            android:text="9.0"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:padding="1dp"/>
 
     </LinearLayout>
 
     <View
+        android:id="@+id/border"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="#DEDEDE" />

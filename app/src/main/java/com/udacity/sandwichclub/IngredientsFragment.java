@@ -85,23 +85,12 @@ public class IngredientsFragment extends Fragment {
 
     private void populateUI(Sandwich sandwich) {
 
-
-
-
         List<String> ingredientsList = sandwich.getIngredients();
-
-
         SpannableStringBuilder mSSBuilderIngredients;
-
-
         mSSBuilderIngredients = showBullet(ingredientsList);
-
-
 
         mIngredients.setText(mSSBuilderIngredients, TextView.BufferType.SPANNABLE);
 
-
-        Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
 
     //Custom method to generate a bulleted list

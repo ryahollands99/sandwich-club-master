@@ -1,7 +1,10 @@
 package com.udacity.sandwichclub;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,31 +26,33 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 
-    public static final String EXTRA_POSITION = "extra_position";
-    private static final int DEFAULT_POSITION = -1;
+public class MainActivity extends AppCompatActivity implements SandwichAdapter.RecyclerViewOnClickListener {
 
-//    private RecyclerView sandwiches;
-//    private RecyclerView.Adapter adapter;
+    private List<Sandwich> mSandwiches = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Intent intent = getIntent();
         if (intent == null) {
             finish();
         }
 
-      List<Sandwich> sandwiches = initSandwiches(intent);
-//
 
+
+        mSandwiches = initSandwiches();
 
        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sandwiches);
-       SandwichAdapter adapter = new SandwichAdapter(sandwiches, getApplication());
+       SandwichAdapter adapter = new SandwichAdapter(mSandwiches, getApplication(), this);
        recyclerView.setAdapter(adapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -56,28 +61,13 @@ public class MainActivity extends AppCompatActivity {
         itemAnimator.setRemoveDuration(1000);
         recyclerView.setItemAnimator(itemAnimator);
 
-//       this.sandwiches = (RecyclerView) findViewById(R.id.sandwiches);
-//       RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-//       this.sandwiches.setLayoutManager(mLayoutManager);
+        timeOfDay();
 
-//       adapter = new SandwichAdapter(context, sandwiches);
-//       this.sandwiches.setAdapter(adapter);
+        ActionBar ab = getSupportActionBar();
+        ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7C4DFF")));
+        ab.setElevation(0f);
 
-//        String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
 
-//        ArrayList<Sandwich> sandwiches = initSandwiches();
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-//                android.R.layout.simple_list_item_1, sandwiches);
-//
-//        // Simplification: Using a ListView instead of a RecyclerView
-//        ListView listView = findViewById(R.id.sandwiches_listview);
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                launchDetailActivity(position);
-//            }
-//        });
     }
 
     private void launchDetailActivity(int position) {
@@ -86,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   private List<Sandwich> initSandwiches(Intent intent) {
+   private List<Sandwich> initSandwiches() {
 
         List<Sandwich> sandwiches = new ArrayList<>();
 
@@ -105,30 +95,32 @@ public class MainActivity extends AppCompatActivity {
        return sandwiches;
    }
 
+    private void timeOfDay(){
+        Calendar c = Calendar.getInstance();
 
-//        List<Sandwich> sandwiches = new List<String>;
+        TextView introMessage = (TextView) findViewById(R.id.intro);
 
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-//        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
-//        if (position == DEFAULT_POSITION) {
-//            // EXTRA_POSITION not found in intent
-//            finish();
-//        }
-//
-//        String[] sandwichString = getResources().getStringArray(R.array.sandwich_details);
-//        String json = sandwichString[position];
-//        Log.v("Intent", "Position is " + position);
-//
-//        try {
-//            sandwich.add(JsonUtils.parseSandwichJson(json));
-//
-//                return sandwich;
-//            }catch (JSONException e){
-//            e.printStackTrace();
-//            finish();
-//        }
-//          return sandwich;
-//         }
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            introMessage.setText("Breakfast Time!  Let\'s pick a sandwich");
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            introMessage.setText("Lunch Time!  Let\'s pick a sandwich for lunch");
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            introMessage.setText("Dinner Time! Let\'s pick a sandwich for dinner");
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            introMessage.setText("Midnight snack! Let\'s pick a sandwich");
+        }
+    }
 
 
+    @Override
+    public void onItemClick(int position) {
+
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_POSITION, position);
+        startActivity(intent);
+
+    }
 }

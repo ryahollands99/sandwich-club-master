@@ -2,6 +2,7 @@ package com.udacity.sandwichclub;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -52,6 +53,7 @@ public class AboutFragment extends Fragment {
             return getView();
         }
 
+
         mDescription = (TextView) rootView.findViewById(R.id.description_tv);
         mAlsoKnownAs = (TextView) rootView.findViewById(R.id.also_known_tv);
         mOrigin = (TextView) rootView.findViewById(R.id.origin_tv);
@@ -74,7 +76,6 @@ public class AboutFragment extends Fragment {
             e.printStackTrace();
         }
 
-
         return rootView;
     }
 
@@ -85,24 +86,49 @@ public class AboutFragment extends Fragment {
 
     private void populateUI(Sandwich sandwich) {
 
-
-
-
-
         List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
+        String placeOfOrigin = sandwich.getPlaceOfOrigin();
 
-
+        if (alsoKnownAsList.size() == 0){
+           // alsoKnownAsList.add("No data is availble");
+            mAlsoKnownAs.setText("Has no other name");
+            mAlsoKnownAs.setTypeface(mAlsoKnownAs.getTypeface(), Typeface.ITALIC);
+            mAlsoKnownAs.setLineSpacing(0.5f,0.9f);
+        }
 
 
         SpannableStringBuilder mSSBuilderAlsoKnownAs;
 
+        if (alsoKnownAsList.size() > 1) {
 
-        mSSBuilderAlsoKnownAs = showBullet(alsoKnownAsList);
+            String sentence = "";
 
+            for (String otherName : alsoKnownAsList){
+                if ((alsoKnownAsList.indexOf(otherName) + 1) == alsoKnownAsList.size()) {
+                    sentence = sentence + otherName;
+                }else{
+                    sentence = sentence + otherName + ", ";
+                }
+            }
+            mAlsoKnownAs.setText(sentence);
+            mAlsoKnownAs.setLineSpacing(0f, 1.3f);
+        } else if (alsoKnownAsList.size() == 1){
 
-      mAlsoKnownAs.setText(mSSBuilderAlsoKnownAs, TextView.BufferType.SPANNABLE);
+            for (String s : alsoKnownAsList){
+                mAlsoKnownAs.setText(s);
+                Log.v("Replaceable", "string is " + "\n");
+                mAlsoKnownAs.setLineSpacing(0.5f,1.0f);
+            }
+        }
+
+        if (placeOfOrigin.length() == 0){
+            mOrigin.setText("Unknown");
+            mOrigin.setTypeface(mOrigin.getTypeface(), Typeface.ITALIC);
+        }else{
+            mOrigin.setText(sandwich.getPlaceOfOrigin());
+        }
+
         mDescription.setText(sandwich.getDescription());
-        mOrigin.setText(sandwich.getPlaceOfOrigin());
 
         Log.v("Tag", sandwich.getPlaceOfOrigin());
     }
