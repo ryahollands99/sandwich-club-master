@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7C4DFF")));
+        ab.setElevation(0f);
 
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
