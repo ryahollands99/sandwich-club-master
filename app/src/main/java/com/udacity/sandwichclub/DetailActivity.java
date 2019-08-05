@@ -109,7 +109,6 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             populateUI(sandwich);
-//            toolbar.setTitle(sandwich.getMainName());
             actionBar.setTitle(sandwich.getMainName());
 
         }catch(JSONException e){
