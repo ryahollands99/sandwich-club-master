@@ -12,42 +12,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.BulletSpan;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONStringer;
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
-
 
     //Create variables for Tab
     private TabAdapter adapter;
@@ -56,8 +41,6 @@ public class DetailActivity extends AppCompatActivity {
 
 
     //Create variables for the views
-
-
     private ImageView mIngredientsIv;
 
 
@@ -86,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle(null);
 
-        mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
+        mIngredientsIv = findViewById(R.id.image_iv);
 
 
         Intent intent = getIntent();
@@ -125,8 +108,8 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
 
 
         adapter = new TabAdapter(getSupportFragmentManager());

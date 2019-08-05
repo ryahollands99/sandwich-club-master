@@ -4,10 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +14,6 @@ import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,7 +45,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.View_H
 
         holder.name.setText(sandwiches.get(position).getMainName());
 
-
         Picasso.with(context).load(sandwiches.get(position).getImage()).into(holder.image);
     }
 
@@ -67,16 +62,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.View_H
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public void insert(int position, Sandwich sandwich) {
-        sandwiches.add(position, sandwich);
-    }
-
-    public void remove (Sandwich sandwich){
-        int position = sandwiches.indexOf(sandwich);
-        sandwiches.remove(sandwich);
-        notifyItemRemoved(position);
-    }
-
     public static class View_Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView mCardView;
         TextView name;
@@ -85,7 +70,7 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.View_H
 
         public View_Holder(View view, RecyclerViewOnClickListener listener) {
             super(view);
-            mCardView = (CardView) view.findViewById(R.id.cardView);
+            mCardView = view.findViewById(R.id.cardView);
             name = view.findViewById(R.id.sandwich_name);
             image = view.findViewById(R.id.sandwich_image);
             this.listener = listener;
@@ -93,7 +78,6 @@ public class SandwichAdapter extends RecyclerView.Adapter<SandwichAdapter.View_H
             view.setOnClickListener(this);
 
         }
-
 
         @Override
         public void onClick(View v) {

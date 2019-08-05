@@ -54,9 +54,9 @@ public class AboutFragment extends Fragment {
         }
 
 
-        mDescription = (TextView) rootView.findViewById(R.id.description_tv);
-        mAlsoKnownAs = (TextView) rootView.findViewById(R.id.also_known_tv);
-        mOrigin = (TextView) rootView.findViewById(R.id.origin_tv);
+        mDescription = rootView.findViewById(R.id.description_tv);
+        mAlsoKnownAs = rootView.findViewById(R.id.also_known_tv);
+        mOrigin = rootView.findViewById(R.id.origin_tv);
 
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);

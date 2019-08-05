@@ -7,15 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+
 
 import com.udacity.sandwichclub.Adapter.SandwichAdapter;
 import com.udacity.sandwichclub.model.Sandwich;
@@ -27,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -41,17 +34,14 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.R
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Intent intent = getIntent();
         if (intent == null) {
             finish();
         }
 
-
-
         mSandwiches = initSandwiches();
 
-       RecyclerView recyclerView = (RecyclerView) findViewById(R.id.sandwiches);
+       RecyclerView recyclerView = findViewById(R.id.sandwiches);
        SandwichAdapter adapter = new SandwichAdapter(mSandwiches, getApplication(), this);
        recyclerView.setAdapter(adapter);
        recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -66,14 +56,6 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.R
         ActionBar ab = getSupportActionBar();
         ab.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#7C4DFF")));
         ab.setElevation(0f);
-
-
-    }
-
-    private void launchDetailActivity(int position) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_POSITION, position);
-        startActivity(intent);
     }
 
    private List<Sandwich> initSandwiches() {
@@ -98,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.R
     private void timeOfDay(){
         Calendar c = Calendar.getInstance();
 
-        TextView introMessage = (TextView) findViewById(R.id.intro);
+        TextView introMessage = findViewById(R.id.intro);
 
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
@@ -113,11 +95,8 @@ public class MainActivity extends AppCompatActivity implements SandwichAdapter.R
         }
     }
 
-
     @Override
     public void onItemClick(int position) {
-
-
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         startActivity(intent);
