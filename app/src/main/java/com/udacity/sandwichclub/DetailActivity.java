@@ -1,7 +1,10 @@
 package com.udacity.sandwichclub;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -81,6 +84,7 @@ public class DetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setTitle(null);
 
         mIngredientsIv = (ImageView) findViewById(R.id.image_iv);
 
@@ -109,7 +113,11 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             populateUI(sandwich);
-            actionBar.setTitle(sandwich.getMainName());
+
+
+            Toolbar toolBar = findViewById(R.id.app_bar);
+            toolBar.setTitle(sandwich.getMainName());
+
 
         }catch(JSONException e){
             e.printStackTrace();
@@ -141,7 +149,6 @@ public class DetailActivity extends AppCompatActivity {
                 .load(sandwich.getImage())
                 .into(mIngredientsIv);
 
-//        setTitle(sandwich.getMainName());
 
     }
 
