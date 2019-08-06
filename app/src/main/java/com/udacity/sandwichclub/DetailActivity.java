@@ -109,18 +109,16 @@ public class DetailActivity extends AppCompatActivity {
             }
 
             populateUI(sandwich);
-//            toolbar.setTitle(sandwich.getMainName());
-            actionBar.setTitle(sandwich.getMainName());
+            Toolbar toolBar = findViewById(R.id.app_bar);
+            toolBar.setTitle(sandwich.getMainName());
+            actionBar.setTitle(null);
 
         }catch(JSONException e){
             e.printStackTrace();
         }
 
-
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
 
         adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new AboutFragment(), "About");
@@ -128,7 +126,6 @@ public class DetailActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void closeOnError() {
@@ -141,15 +138,10 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(mIngredientsIv);
-
-//        setTitle(sandwich.getMainName());
-
     }
 
     //Custom method to generate a bulleted list
     private SpannableStringBuilder showBullet (List<String> textList){
-
-
 
         //Create a spannable string builder
         SpannableStringBuilder mSSBuilder = new SpannableStringBuilder();
@@ -168,7 +160,6 @@ public class DetailActivity extends AppCompatActivity {
             Log.v("Bullet", "Start and end index are " + start + " " + end + " for word " + s);
             mSSBuilder.setSpan(bulletSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
-
 
         return mSSBuilder;
     }
